@@ -1,0 +1,74 @@
+#dev模式的备份,druid配置好可运行后删除
+#端口
+server:
+  port: 9091
+  servlet:
+    #context-path: /boot
+    jsp:
+      init-parameters:
+        development: true
+
+
+spring:
+  #数据源
+  #datasource:
+  #  url: jdbc:mysql://localhost:3306/myweb?characterEncoding=utf-8&serverTimezone=UTC
+  #  username: liuhan
+  #  password: 123456
+  #  driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+  #jsp支持
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    #这表示只有静态资源的访问路径为/resources/**时，才会处理请求
+    #static-path-pattern: /**
+    #告诉Spring Boot应该在何处查找静态资源文件
+    #resources:
+    #static-locations: classpath:/static,classpath:/public,classpath:/resources,classpath:/META-INF/resources,classpath:/**
+  #日期格式支持
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: GMT+8
+  data:
+    neo4j:
+      open-in-view:
+
+#mybatis配置
+mybatis:
+  #配置mapper.xml文件所在的路径
+  mapper-locations: classpath*:mapper/*.xml
+  #配置映射类所在的包名
+  type-aliases-package: com.arthur.web.dao.mapper
+
+#日志配置
+#logging.level.root=debug
+#logger
+logging:
+  path: /usr/local/springboot/log/
+  file: /usr/local/springboot/log/ssmdemo.log
+  level:
+    root: INFO
+
+
+druid:
+  allow: #允许登陆的IP地址
+    ip: 127.0.0.1
+  login: #登陆的账户密码
+    user_name: root
+    password: root
+
+
+kisso:
+  config:
+    # signkey: sgdfgdfgrty234345
+    signkey: C691d971EJ3H376G81   # 对称签名密钥
+    cookieName: ssmdemo             # COOKIE 名称
+    loginUrl: /login
+    logoutUrl: /logout
+    paramReturl: ReturnURL
+    cookieDomain: 127.0.0.1       #目前用于本地测试 先用 127.0.0.1 本地使用需要配置host 127.0.0.1 **.nbeport.com

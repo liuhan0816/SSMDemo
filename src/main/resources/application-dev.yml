@@ -1,0 +1,50 @@
+#主数据库
+my:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/myweb?characterEncoding=utf-8&serverTimezone=UTC
+    username: liuhan
+    password: 123456
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    filters: stat,wall,log4j
+    initialSize: 1
+    maxActive: 50
+    maxPoolPreparedStatementPerConnectionSize: 100
+    maxWait: 60000
+    minEvictableIdleTimeMillis: 300000
+    minIdle: 40
+    poolPreparedStatements: true
+    removeAbandoned: true
+    removeAbandonedTimeout: 180
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    validationQuery: select 1 from dual
+    logAbandoned: true
+
+#日志配置
+#logging.level.root=debug
+#logger
+logging:
+  path: /usr/local/springboot/log/
+  file: /usr/local/springboot/log/ssmdemo.log
+  level:
+    root: INFO
+
+kisso:
+  config:
+    # signkey: sgdfgdfgrty234345
+    signkey: C691d971EJ3H376G81   # 对称签名密钥
+    cookieName: ssmdemo             # COOKIE 名称
+    loginUrl: /login
+    logoutUrl: /logout
+    paramReturl: ReturnURL
+    cookieDomain: 127.0.0.1       #目前用于本地测试 先用 127.0.0.1 本地使用需要配置host 127.0.0.1 **.nbeport.com
+
+druid:
+  allow: #允许登陆的IP地址
+    ip: 127.0.0.1
+  login: #登陆的账户密码
+    user_name: root
+    password: root

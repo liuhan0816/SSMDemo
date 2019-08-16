@@ -1,0 +1,33 @@
+spring:
+  # 环境 dev:开发环境|test:测试环境|prod:生产环境
+  profiles:
+    active: dev #激活的配置文件
+  jpa:
+    database: mysql
+  #jsp支持
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  #日期格式支持
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: GMT+8
+
+#端口
+server:
+  port: 9091
+  servlet:
+    #context-path: /boot
+    jsp:
+      init-parameters:
+        development: true
+
+#mybatis配置
+mybatis:
+  #配置mapper.xml文件所在的路径
+  mapper-locations: classpath*:mapper/*.xml
+  #配置映射类所在的包名
+  type-aliases-package: com.arthur.web.dao.mapper

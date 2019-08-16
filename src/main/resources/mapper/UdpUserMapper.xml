@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.arthur.web.dao.mapper.UdpUserMapper">
+  <resultMap id="BaseResultMap" type="com.arthur.web.dao.entity.UdpUser">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="creator_id" jdbcType="VARCHAR" property="creatorId" />
+    <result column="creator_name" jdbcType="VARCHAR" property="creatorName" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="modifier_id" jdbcType="VARCHAR" property="modifierId" />
+    <result column="modifier_name" jdbcType="VARCHAR" property="modifierName" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="cer_type" jdbcType="VARCHAR" property="cerType" />
+    <result column="cer_no" jdbcType="VARCHAR" property="cerNo" />
+    <result column="tel_no" jdbcType="VARCHAR" property="telNo" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="mail" jdbcType="VARCHAR" property="mail" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="fax" jdbcType="VARCHAR" property="fax" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="is_active" jdbcType="VARCHAR" property="isActive" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="login_fail" jdbcType="VARCHAR" property="loginFail" />
+    <result column="lock_login_date" jdbcType="TIMESTAMP" property="lockLoginDate" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_code, user_name, user_pwd, user_type, created_time, creator_id, creator_name, 
+    modify_time, modifier_id, modifier_name, gender, cer_type, cer_no, tel_no, mobile, 
+    mail, nick_name, fax, birthday, is_active, status, login_fail, lock_login_date, token
+  </sql>
+  <select id="selectByExample" parameterType="com.arthur.web.dao.entity.UdpUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from udp_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from udp_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from udp_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.arthur.web.dao.entity.UdpUserExample">
+    delete from udp_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.arthur.web.dao.entity.UdpUser">
+    insert into udp_user (id, user_code, user_name, 
+      user_pwd, user_type, created_time, 
+      creator_id, creator_name, modify_time, 
+      modifier_id, modifier_name, gender, 
+      cer_type, cer_no, tel_no, 
+      mobile, mail, nick_name, 
+      fax, birthday, is_active, 
+      status, login_fail, lock_login_date, 
+      token)
+    values (#{id,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPwd,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{creatorId,jdbcType=VARCHAR}, #{creatorName,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{modifierId,jdbcType=VARCHAR}, #{modifierName,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{cerType,jdbcType=VARCHAR}, #{cerNo,jdbcType=VARCHAR}, #{telNo,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{isActive,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{loginFail,jdbcType=VARCHAR}, #{lockLoginDate,jdbcType=TIMESTAMP}, 
+      #{token,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.arthur.web.dao.entity.UdpUser">
+    insert into udp_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPwd != null">
+        user_pwd,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="creatorId != null">
+        creator_id,
+      </if>
+      <if test="creatorName != null">
+        creator_name,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="modifierId != null">
+        modifier_id,
+      </if>
+      <if test="modifierName != null">
+        modifier_name,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="cerType != null">
+        cer_type,
+      </if>
+      <if test="cerNo != null">
+        cer_no,
+      </if>
+      <if test="telNo != null">
+        tel_no,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="fax != null">
+        fax,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="loginFail != null">
+        login_fail,
+      </if>
+      <if test="lockLoginDate != null">
+        lock_login_date,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorName != null">
+        #{creatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierId != null">
+        #{modifierId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifierName != null">
+        #{modifierName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="cerType != null">
+        #{cerType,jdbcType=VARCHAR},
+      </if>
+      <if test="cerNo != null">
+        #{cerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="telNo != null">
+        #{telNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="loginFail != null">
+        #{loginFail,jdbcType=VARCHAR},
+      </if>
+      <if test="lockLoginDate != null">
+        #{lockLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.arthur.web.dao.entity.UdpUserExample" resultType="java.lang.Long">
+    select count(*) from udp_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update udp_user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userCode != null">
+        user_code = #{record.userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPwd != null">
+        user_pwd = #{record.userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null">
+        user_type = #{record.userType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null">
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorId != null">
+        creator_id = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorName != null">
+        creator_name = #{record.creatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyTime != null">
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifierId != null">
+        modifier_id = #{record.modifierId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifierName != null">
+        modifier_name = #{record.modifierName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cerType != null">
+        cer_type = #{record.cerType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cerNo != null">
+        cer_no = #{record.cerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telNo != null">
+        tel_no = #{record.telNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mail != null">
+        mail = #{record.mail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fax != null">
+        fax = #{record.fax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.isActive != null">
+        is_active = #{record.isActive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginFail != null">
+        login_fail = #{record.loginFail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lockLoginDate != null">
+        lock_login_date = #{record.lockLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.token != null">
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update udp_user
+    set id = #{record.id,jdbcType=VARCHAR},
+      user_code = #{record.userCode,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_pwd = #{record.userPwd,jdbcType=VARCHAR},
+      user_type = #{record.userType,jdbcType=VARCHAR},
+      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      creator_id = #{record.creatorId,jdbcType=VARCHAR},
+      creator_name = #{record.creatorName,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      modifier_id = #{record.modifierId,jdbcType=VARCHAR},
+      modifier_name = #{record.modifierName,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=VARCHAR},
+      cer_type = #{record.cerType,jdbcType=VARCHAR},
+      cer_no = #{record.cerNo,jdbcType=VARCHAR},
+      tel_no = #{record.telNo,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      mail = #{record.mail,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      fax = #{record.fax,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=DATE},
+      is_active = #{record.isActive,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      login_fail = #{record.loginFail,jdbcType=VARCHAR},
+      lock_login_date = #{record.lockLoginDate,jdbcType=TIMESTAMP},
+      token = #{record.token,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.arthur.web.dao.entity.UdpUser">
+    update udp_user
+    <set>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null">
+        creator_id = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorName != null">
+        creator_name = #{creatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierId != null">
+        modifier_id = #{modifierId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifierName != null">
+        modifier_name = #{modifierName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="cerType != null">
+        cer_type = #{cerType,jdbcType=VARCHAR},
+      </if>
+      <if test="cerNo != null">
+        cer_no = #{cerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="telNo != null">
+        tel_no = #{telNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="loginFail != null">
+        login_fail = #{loginFail,jdbcType=VARCHAR},
+      </if>
+      <if test="lockLoginDate != null">
+        lock_login_date = #{lockLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.arthur.web.dao.entity.UdpUser">
+    update udp_user
+    set user_code = #{userCode,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_pwd = #{userPwd,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      creator_id = #{creatorId,jdbcType=VARCHAR},
+      creator_name = #{creatorName,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      modifier_id = #{modifierId,jdbcType=VARCHAR},
+      modifier_name = #{modifierName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      cer_type = #{cerType,jdbcType=VARCHAR},
+      cer_no = #{cerNo,jdbcType=VARCHAR},
+      tel_no = #{telNo,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      is_active = #{isActive,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      login_fail = #{loginFail,jdbcType=VARCHAR},
+      lock_login_date = #{lockLoginDate,jdbcType=TIMESTAMP},
+      token = #{token,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
